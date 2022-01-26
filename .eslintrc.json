@@ -1,3 +1,9 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "no-trailing-spaces": "error",
+    "no-spaced-func": "error",
+    "no-multi-spaces": "error",
+    "no-mixed-spaces-and-tabs": "error"
+  }
 }
