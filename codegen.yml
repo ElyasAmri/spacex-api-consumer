@@ -1,0 +1,13 @@
+# Where to get schema data
+schema:
+  - https://api.spacex.land/graphql/
+# The Client side queries to turn into services
+documents:
+  - queries/**/*.graphql
+# Where to output the services and the list of plugins
+generates:
+  ./spacex-graphql.service.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo

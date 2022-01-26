@@ -35,3 +35,6 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# spacex-graphql file should be generated via `yarn codegen`
+spacex-graphql.service.ts
