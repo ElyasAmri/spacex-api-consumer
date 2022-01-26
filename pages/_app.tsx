@@ -17,19 +17,17 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ApolloProvider client={client}>
           <div className="flex flex-col w-screen min-h-screen bg-gray-100">
 
-            <nav className="py-4 w-full bg-red-600">
+            <nav className="py-4 w-full bg-white shadow-md">
               <p className="text-center text-4xl font-bold">SpaceX API Displayer</p>
             </nav>
 
-            <hr className="mx-2 my-1"/>
-
-            <main className="w-100 flex-1 px-2 flex flex-col">
+            <main className="w-100 flex-1 px-2 flex flex-col py-2">
               <Component {...pageProps}/>
             </main>
 
             <hr className="mx-2 my-1"/>
 
-            <footer className="w-full py-2">
+            <footer className="w-full py-2 bg-white">
               <p className="text-center">Made by Elyas A. Al-Amri</p>
             </footer>
           </div>
