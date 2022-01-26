@@ -21,11 +21,11 @@ const Home: NextPage = () => {
         </Head>
         <p className="text-center text-4xl underline py-2">Launches</p>
         <hr className="my-1"/>
-        {error && <p>An error occurred :(</p>}
         <div className="flex-1 flex flex-col justify-center items-center space-y-4">
           {loading && <p className="text-center text-4xl text-gray-600 pb-10">loading...</p>}
+          {error && <p className="text-center text-4xl pb-10">An error occurred :(</p>}
           {!loading && data?.launchesPast?.map(launch => (launch &&
-              <div key={launch.id} className="w-full p-2 rounded shadow-md bg-white">
+              <a key={launch.id} href={"/launches/" + launch.id} className="block w-full p-2 rounded shadow-md bg-white">
                 <p>ID: {launch.id}</p>
                 <p>Mission Name: {launch.mission_name}</p>
                 <p>Rocket Name: {launch.rocket?.rocket_name}</p>
@@ -33,12 +33,7 @@ const Home: NextPage = () => {
                     .toLocaleDateString("en-US", dateFormat)}</p>
                 <img src={launch.links?.mission_patch_small ?? ""} alt="Mission Logo"
                      className="mt-4 mb-2 mx-auto"/>
-                <div className="space-y-2">
-                  {launch.links?.flickr_images?.map(img => (
-                      <img key={img} src={img ?? ""} alt="Mission Image"/>
-                  ))}
-                </div>
-              </div>
+              </a>
             ))}
         </div>
       </>

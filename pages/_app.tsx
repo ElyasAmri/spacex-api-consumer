@@ -15,13 +15,13 @@ function MyApp({ Component, pageProps }: AppProps) {
           <link rel="icon" href="/favicon.ico"/>
         </Head>
         <ApolloProvider client={client}>
-          <div className="flex flex-col w-screen min-h-screen bg-gray-100">
+          <div className="flex flex-col w-full min-h-screen bg-gray-100">
 
             <nav className="py-4 w-full bg-white shadow-md">
               <p className="text-center text-4xl font-bold">SpaceX API Displayer</p>
             </nav>
 
-            <main className="w-100 flex-1 px-2 flex flex-col py-2">
+            <main className="w-full flex-1 px-2 flex flex-col py-2">
               <Component {...pageProps}/>
             </main>
 
