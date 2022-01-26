@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 import { usePastLaunchesListQuery } from '../../spacex-graphql.service';
 
 const dateFormat : Intl.DateTimeFormatOptions = {
@@ -36,6 +37,12 @@ const Home: NextPage = () => {
               </a>
             ))}
         </div>
+
+        <Link href="/">
+          <a className="block bg-black text-white text-center max-w-max px-8 py-1 mx-auto mt-4 mb-2
+           rounded-md ring ring-yellow-600 shadow-lg ">Back</a>
+        </Link>
+
       </>
   )
 }

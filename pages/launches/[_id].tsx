@@ -1,6 +1,7 @@
 import {useRouter} from 'next/router';
 import {useLaunchDetailsQuery} from '../../spacex-graphql.service'
 import Head from 'next/head';
+import Link from 'next/link';
 
 function LaunchDetail({id}: {id: string}) {
   const {data, loading, error} = useLaunchDetailsQuery({variables: {id}})
@@ -19,10 +20,11 @@ function LaunchDetail({id}: {id: string}) {
           {error && <p className="text-center text-4xl text-gray-600 pb-10">An error occurred :(</p>}
           {!loading &&
             <>
-              <p className="mb-5 text-justify">{data?.launch?.details ?? "No description" }</p>
+              <p className="mb-5 mt-2 text-justify">{data?.launch?.details ?? "No description" }</p>
               <div className="space-y-2">
-                {!data?.launch?.links?.flickr_images?.length ? <p className="text-center py-40 border">No Images</p> :
-                    data.launch.links.flickr_images.map(img => (
+                {!data?.launch?.links?.flickr_images?.length
+                    ? <p className="text-center py-40 border rounded bg-gray-200">No Images</p>
+                    : data.launch.links.flickr_images.map(img => (
                     <img className="rounded" key={img} src={img ?? ""} alt="Mission Image"/>
                 ))}
               </div>
@@ -37,11 +39,15 @@ function Page() {
   const router = useRouter()
   const id = router.query._id as string
 
-  if (id) {
-    return <LaunchDetail id={id}/>
-  }
-
-  return <p>Loading</p>
+  return (
+      <>
+        {id ? <LaunchDetail id={id}/> : <p>Loading...</p>}
+        <Link href="/launches">
+          <a className="block bg-black text-white text-center max-w-max px-8 py-1 mx-auto mt-4 mb-2
+           rounded-md ring ring-yellow-600 shadow-lg ">Back</a>
+        </Link>
+      </>
+  )
 }
 
 export default Page
