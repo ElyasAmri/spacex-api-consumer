@@ -21,13 +21,13 @@ const LaunchDetail = ({id}: {id: string}) => {
           {error && <p className="text-center text-4xl text-gray-600 pb-10">An error occurred :(</p>}
           {!loading &&
             <>
-              <p className="mb-5 mt-2 text-justify">{data?.launch?.details ?? 'No description' }</p>
+              <p className="mb-5 mt-2 text-justify">{data?.launch?.details ?? 'No description'}</p>
               <div className="space-y-2">
                 {!data?.launch?.links?.flickr_images?.length
                     ? <p className="text-center py-40 border rounded bg-gray-200">No Images</p>
                     : data.launch.links.flickr_images.map(img => (
-                    <img className="rounded" key={img} src={img ?? ''} alt="Mission Image"/>
-                ))}
+                        <img className="rounded" key={img} src={img ?? ''} alt="Mission Image"/>
+                    ))}
               </div>
             </>
           }

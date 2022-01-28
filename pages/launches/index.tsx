@@ -7,7 +7,7 @@ import {useRouter} from 'next/router'
 const perPage = 16
 const maxPage = 6
 
-const dateFormat : Intl.DateTimeFormatOptions = {
+const dateFormat: Intl.DateTimeFormatOptions = {
   minute: 'numeric',
   day: 'numeric',
   month: 'short',
@@ -16,7 +16,7 @@ const dateFormat : Intl.DateTimeFormatOptions = {
   hour: 'numeric',
 }
 
-const LaunchesList = (props : { page? : string }) => {
+const LaunchesList = (props: {page?: string}) => {
   const page = (props.page ? Number.parseInt(props.page) : 1)
 
   const options = {
@@ -39,16 +39,17 @@ const LaunchesList = (props : { page? : string }) => {
         {loading && <p className="text-center text-4xl text-gray-600 pb-10">loading...</p>}
         <div className="flex-1 grid grid-cols-1 gap-2 mx-auto md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {!loading && data?.launchesPast?.map(launch => (launch &&
-              <a key={launch.id} href={'/launches/' + launch.id} className="flex flex-col w-full p-2 rounded shadow-md bg-white">
-                <img src={launch.links?.mission_patch_small ?? ''} alt="Mission Logo"
-                     className="mt-4 mb-2 mx-auto"/>
-                {/*<p>ID: {launch.id}</p>*/}
-                <p className="mt-auto">Mission Name: {launch.mission_name}</p>
-                <p>Rocket Name: {launch.rocket?.rocket_name}</p>
-                <p>Launch Date: {new Date(launch.launch_date_utc)
-                    .toLocaleDateString('en-US', dateFormat)}</p>
-              </a>
-            ))}
+            <a key={launch.id} href={'/launches/' + launch.id}
+               className="flex flex-col w-full p-2 rounded shadow-md bg-white">
+              <img src={launch.links?.mission_patch_small ?? ''} alt="Mission Logo"
+                   className="mt-4 mb-2 mx-auto"/>
+              {/*<p>ID: {launch.id}</p>*/}
+              <p className="mt-auto">Mission Name: {launch.mission_name}</p>
+              <p>Rocket Name: {launch.rocket?.rocket_name}</p>
+              <p>Launch Date: {new Date(launch.launch_date_utc)
+                  .toLocaleDateString('en-US', dateFormat)}</p>
+            </a>
+          ))}
         </div>
 
         <div className="flex flex-col mx-auto mt-4 mb-2">
@@ -89,7 +90,7 @@ const LaunchesList = (props : { page? : string }) => {
   )
 }
 
-const Page : NextPage = () => {
+const Page: NextPage = () => {
   const {query} = useRouter()
   return <LaunchesList page={query.page as string | undefined}/>
 }

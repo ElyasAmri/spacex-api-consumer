@@ -15,6 +15,6 @@ const Home: NextPage = () => (
         <a className="mt-4 block mx-auto px-20 py-10 text-3xl font-bold border bg-white shadow-md">Open Launches</a>
       </Link>
     </>
-  )
+)
 
 export default Home
