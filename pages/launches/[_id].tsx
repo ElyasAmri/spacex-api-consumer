@@ -23,12 +23,12 @@ const LaunchDetail = ({id}: Props) => {
           {error && <p className="text-center text-4xl text-gray-600 pb-10">An error occurred :(</p>}
           {!loading &&
             <>
-              <p className="mb-5 mt-2 text-justify">{data?.launch?.details ?? 'No description'}</p>
-              <div className="space-y-2">
+              <p className="mb-5 mt-2 text-justify mx-auto md:max-w-xl lg:max-w-2xl xl:max-w-3xl ">{data?.launch?.details ?? 'No description'}</p>
+              <div className="grid grid-cols-1 gap-2 max-w-md mx-auto lg:grid-cols-2 xl:grid-cols-5 lg:max-w-3xl xl:max-w-none xl:px-6">
                 {!data?.launch?.links?.flickr_images?.length
                     ? <p className="text-center py-40 border rounded bg-gray-200">No Images</p>
                     : data.launch.links.flickr_images.map(img => (
-                        <img className="rounded" key={img} src={img ?? ''} alt="Mission Image"/>
+                        <img className="rounded self-center" key={img} src={img ?? ''} alt="Mission Image"/>
                     ))}
               </div>
             </>
