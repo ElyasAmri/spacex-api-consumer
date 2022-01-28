@@ -5,6 +5,7 @@ import { usePastLaunchesListQuery } from '../../spacex-graphql.service'
 import { useRouter } from 'next/router'
 
 const perPage = 15
+const maxPage = 7
 
 const dateFormat : Intl.DateTimeFormatOptions = {
   minute: 'numeric',
@@ -51,21 +52,33 @@ const LaunchesList = (props : { page? : string }) => {
             ))}
         </div>
 
-        <div className="flex mx-auto space-x-4 my-4">
+        <div className="flex mx-auto space-x-4 mt-4 mb-2">
           {page != 0 &&
             <Link href={{href: '/launches', query: {page: page-1}}}>
               <a className="block bg-blue-600 text-white text-center max-w-max px-8 py-1
-           rounded-md ring ring-yellow-600 shadow-lg">
+           rounded-md ring ring-gray-400 shadow-lg">
                 {'<<'} Previous
               </a>
             </Link>
           }
-          <Link href={{href: '/launches', query: {page: page+1}}}>
-            <a className="block bg-blue-600 text-white text-center max-w-max px-8 py-1
-           rounded-md ring ring-yellow-600 shadow-lg">
+          {page != maxPage &&
+            <Link href={{href: '/launches', query: {page: page + 1}}}>
+              <a className="block bg-blue-600 text-white text-center max-w-max px-8 py-1
+             rounded-md ring ring-gray-400 shadow-lg">
               Next {'>>'}
-            </a>
-          </Link>
+              </a>
+            </Link>
+          }
+        </div>
+        <div className="flex mx-auto mb-2 space-x-4">
+          {Array(7).fill(0).map((_,i) => (
+              <Link key={i} href={{href: '/launches', query: {page: i+1}}}>
+                <a className="block bg-blue-600 text-white text-center max-w-max
+                 rounded-md ring ring-gray-400 shadow-lg px-2">
+                  {i+1}
+                </a>
+              </Link>
+          ))}
         </div>
         <Link href="/">
           <a className="block bg-black text-white text-center max-w-max mx-auto px-32 py-1
