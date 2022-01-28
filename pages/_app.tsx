@@ -14,20 +14,22 @@ const MyApp = ({Component, pageProps}: AppProps) => (
         <link rel="icon" href="/favicon.ico"/>
       </Head>
       <ApolloProvider client={client}>
-        <div className="flex flex-col w-full min-h-screen bg-gray-100">
+        <div className="flex flex-col w-full min-h-screen bg-gray-100 dark:bg-[#181818] dark:text-white">
 
-          <nav className="py-4 w-full bg-white shadow-md">
-            <p className="text-center text-4xl font-bold">SpaceX API Displayer</p>
+          <nav className="py-4 w-full bg-white dark:bg-black shadow-md dark:border-b-2">
+            <p className="text-center text-4xl font-bold">
+              SpaceX API Displayer
+            </p>
           </nav>
 
-          <main className="w-full flex-1 px-2 flex flex-col py-2">
+          <main className="w-full flex-1 p-2 flex flex-col">
             <Component {...pageProps}/>
           </main>
 
           <hr className="mx-2 my-1"/>
 
-          <footer className="w-full py-2 bg-white">
-            <p className="text-center">Made by Elyas A. Al-Amri</p>
+          <footer className="w-full py-2 bg-white dark:bg-black">
+            <p className="text-center font-bold">Made by Elyas A. Al-Amri</p>
           </footer>
         </div>
       </ApolloProvider>

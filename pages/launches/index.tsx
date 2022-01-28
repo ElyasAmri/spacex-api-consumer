@@ -5,7 +5,7 @@ import {usePastLaunchesListQuery} from '../../spacex-graphql.service'
 import {useRouter} from 'next/router'
 
 const perPage = 16
-const maxPage = 6
+const maxPage = 7
 
 const dateFormat: Intl.DateTimeFormatOptions = {
   minute: 'numeric',
@@ -19,7 +19,7 @@ const dateFormat: Intl.DateTimeFormatOptions = {
 type Props = {page?: string}
 
 const LaunchesList = (props: Props) => {
-  const page = (props.page ? Number.parseInt(props.page) : 1)
+  const page = (props.page ? parseInt(props.page) : 1)
 
   const options = {
     variables: {
@@ -37,12 +37,12 @@ const LaunchesList = (props: Props) => {
         </Head>
         <p className="text-center text-4xl underline py-2">Launches</p>
         <hr className="my-1"/>
-        {error && <p className="text-center text-4xl pb-10">An error occurred :(</p>}
-        {loading && <p className="text-center text-4xl text-gray-600 pb-10">loading...</p>}
+        {error && <p className="text-center text-4xl pb-10 dark:text-gray-200">An error occurred :(</p>}
+        {loading && <p className="text-center text-4xl text-gray-600 dark:text-gray-200 pb-10">loading...</p>}
         <div className="flex-1 grid grid-cols-1 gap-2 mx-auto md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {!loading && data?.launchesPast?.map(launch => (launch &&
             <a key={launch.id} href={'/launches/' + launch.id}
-               className="flex flex-col w-full p-2 rounded shadow-md bg-white">
+               className="flex flex-col w-full p-2 rounded shadow-md bg-white dark:bg-black dark:border-2 dark:border-[#e0e0e0]">
               <img src={launch.links?.mission_patch_small ?? ''} alt="Mission Logo"
                    className="mt-4 mb-2 mx-auto"/>
               {/*<p>ID: {launch.id}</p>*/}
@@ -56,11 +56,11 @@ const LaunchesList = (props: Props) => {
 
         <div className="flex flex-col mx-auto mt-4 mb-2">
           <div className="flex space-x-4">
-            {page != 0 &&
+            {page > 1 &&
               <Link href={{href: '/launches', query: {page: page - 1}}}>
                 <a className="block min-w-max bg-blue-600 text-white text-center px-2
                  rounded-md ring ring-gray-400 shadow-lg">
-                  {'<<'} Previous
+                  {'<<'}
                 </a>
               </Link>
             }
@@ -76,7 +76,7 @@ const LaunchesList = (props: Props) => {
               <Link href={{href: '/launches', query: {page: page + 1}}}>
                 <a className="block min-w-max bg-blue-600 text-white text-center px-2
              rounded-md ring ring-gray-400 shadow-lg">
-                  Next {'>>'}
+                  {'>>'}
                 </a>
               </Link>
             }

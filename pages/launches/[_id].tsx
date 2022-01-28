@@ -19,8 +19,8 @@ const LaunchDetail = ({id}: Props) => {
         </p>
         <hr className="my-1"/>
         <div className="">
-          {loading && <p className="text-center text-4xl text-gray-600 pb-10">loading...</p>}
-          {error && <p className="text-center text-4xl text-gray-600 pb-10">An error occurred :(</p>}
+          {loading && <p className="text-center text-4xl text-gray-600 dark:text-gray-200 pb-10">loading...</p>}
+          {error && <p className="text-center text-4xl text-gray-600 dark:text-gray-200 pb-10">An error occurred :(</p>}
           {!loading &&
             <>
               <p className="mb-5 mt-2 text-justify mx-auto md:max-w-xl lg:max-w-2xl xl:max-w-3xl ">{data?.launch?.details ?? 'No description'}</p>
