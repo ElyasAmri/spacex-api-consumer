@@ -1,7 +1,10 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { usePastLaunchesListQuery } from '../../spacex-graphql.service';
+import { usePastLaunchesListQuery } from '../../spacex-graphql.service'
+import { useRouter } from 'next/router'
+
+const perPage = 15
 
 const dateFormat : Intl.DateTimeFormatOptions = {
   minute: 'numeric',
@@ -12,8 +15,18 @@ const dateFormat : Intl.DateTimeFormatOptions = {
   hour: 'numeric',
 }
 
-const Home: NextPage = () => {
-  const {data, loading, error} = usePastLaunchesListQuery({variables: {limit: 10}})
+const LaunchesList = (props : { page? : string }) => {
+
+  const page = props.page ? Number.parseInt(props.page) : 0
+
+  const options = {
+    variables: {
+      limit: perPage,
+      offset: page * (perPage-1),
+    }
+  }
+
+  const {data, loading, error} = usePastLaunchesListQuery(options)
 
   return (
       <>
@@ -22,29 +35,49 @@ const Home: NextPage = () => {
         </Head>
         <p className="text-center text-4xl underline py-2">Launches</p>
         <hr className="my-1"/>
-        <div className="flex-1 flex flex-col justify-center items-center space-y-4">
-          {loading && <p className="text-center text-4xl text-gray-600 pb-10">loading...</p>}
-          {error && <p className="text-center text-4xl pb-10">An error occurred :(</p>}
+        {error && <p className="text-center text-4xl pb-10">An error occurred :(</p>}
+        {loading && <p className="text-center text-4xl text-gray-600 pb-10">loading...</p>}
+        <div className="flex-1 grid grid-cols-1 gap-2 mx-auto md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {!loading && data?.launchesPast?.map(launch => (launch &&
               <a key={launch.id} href={"/launches/" + launch.id} className="block w-full p-2 rounded shadow-md bg-white">
-                <p>ID: {launch.id}</p>
+                <img src={launch.links?.mission_patch_small ?? ""} alt="Mission Logo"
+                     className="mt-4 mb-2 mx-auto"/>
+                {/*<p>ID: {launch.id}</p>*/}
                 <p>Mission Name: {launch.mission_name}</p>
                 <p>Rocket Name: {launch.rocket?.rocket_name}</p>
                 <p>Launch Date: {new Date(launch.launch_date_utc)
                     .toLocaleDateString("en-US", dateFormat)}</p>
-                <img src={launch.links?.mission_patch_small ?? ""} alt="Mission Logo"
-                     className="mt-4 mb-2 mx-auto"/>
               </a>
             ))}
         </div>
 
+        <div className="flex mx-auto space-x-4 my-4">
+          {page != 0 &&
+            <Link href={{href: '/launches', query: {page: page-1}}}>
+              <a className="block bg-blue-600 text-white text-center max-w-max px-8 py-1
+           rounded-md ring ring-yellow-600 shadow-lg">
+                {'<<'} Previous
+              </a>
+            </Link>
+          }
+          <Link href={{href: '/launches', query: {page: page+1}}}>
+            <a className="block bg-blue-600 text-white text-center max-w-max px-8 py-1
+           rounded-md ring ring-yellow-600 shadow-lg">
+              Next {'>>'}
+            </a>
+          </Link>
+        </div>
         <Link href="/">
-          <a className="block bg-black text-white text-center max-w-max px-8 py-1 mx-auto mt-4 mb-2
-           rounded-md ring ring-yellow-600 shadow-lg ">Back</a>
+          <a className="block bg-black text-white text-center max-w-max mx-auto px-32 py-1
+           rounded-md ring ring-yellow-600 shadow-lg">Back</a>
         </Link>
-
       </>
   )
 }
 
-export default Home
+const Page : NextPage = () => {
+  const {query} = useRouter()
+  return <LaunchesList page={query.page as string | undefined}/>
+}
+
+export default Page

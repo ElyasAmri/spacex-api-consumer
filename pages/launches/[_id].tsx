@@ -1,10 +1,11 @@
-import {useRouter} from 'next/router';
+import {useRouter} from 'next/router'
 import {useLaunchDetailsQuery} from '../../spacex-graphql.service'
-import Head from 'next/head';
-import Link from 'next/link';
+import Head from 'next/head'
 
 function LaunchDetail({id}: {id: string}) {
-  const {data, loading, error} = useLaunchDetailsQuery({variables: {id}})
+  const options = {variables: {id}}
+
+  const {data, loading, error} = useLaunchDetailsQuery(options)
 
   return (
       <>
@@ -42,10 +43,10 @@ function Page() {
   return (
       <>
         {id ? <LaunchDetail id={id}/> : <p>Loading...</p>}
-        <Link href="/launches">
-          <a className="block bg-black text-white text-center max-w-max px-8 py-1 mx-auto mt-4 mb-2
-           rounded-md ring ring-yellow-600 shadow-lg ">Back</a>
-        </Link>
+        <button onClick={router.back} className="block bg-black text-white text-center max-w-max
+         px-8 py-1 mx-auto mt-4 mb-2 rounded-md ring ring-yellow-600 shadow-lg">
+          Back
+        </button>
       </>
   )
 }
