@@ -2,7 +2,9 @@ import {useRouter} from 'next/router'
 import {useLaunchDetailsQuery} from '../../spacex-graphql.service'
 import Head from 'next/head'
 
-const LaunchDetail = ({id}: {id: string}) => {
+type Props = {id: string}
+
+const LaunchDetail = ({id}: Props) => {
   const options = {variables: {id}}
 
   const {data, loading, error} = useLaunchDetailsQuery(options)

@@ -16,7 +16,9 @@ const dateFormat: Intl.DateTimeFormatOptions = {
   hour: 'numeric',
 }
 
-const LaunchesList = (props: {page?: string}) => {
+type Props = {page?: string}
+
+const LaunchesList = (props: Props) => {
   const page = (props.page ? Number.parseInt(props.page) : 1)
 
   const options = {
