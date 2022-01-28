@@ -18,12 +18,12 @@ const dateFormat : Intl.DateTimeFormatOptions = {
 
 const LaunchesList = (props : { page? : string }) => {
 
-  const page = props.page ? Number.parseInt(props.page) : 0
+  const page = (props.page ? Number.parseInt(props.page) - 1 : 0)
 
   const options = {
     variables: {
       limit: perPage,
-      offset: page * (perPage-1),
+      offset: page * perPage,
     }
   }
 
