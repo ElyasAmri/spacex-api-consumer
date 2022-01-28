@@ -34,6 +34,7 @@
     "no-var": "error",
     "no-whitespace-before-property": "error",
     "nonblock-statement-body-position": ["error", "beside"],
+    "object-curly-spacing": "error",
     "operator-linebreak": ["error", "after", {"overrides": {"?": "before", ":": "before"}}],
     "padded-blocks": ["error", "never"],
     "prefer-arrow-callback": "error",
@@ -43,6 +44,7 @@
     "rest-spread-spacing": "error",
     "semi": ["error", "never"],
     "space-before-blocks": "error",
+    "space-before-function-paren": ["error", "never"],
     "space-in-parens": "error",
     "space-infix-ops": "error",
     "template-curly-spacing": ["error", "never"]

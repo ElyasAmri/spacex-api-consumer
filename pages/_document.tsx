@@ -1,17 +1,17 @@
-import Document, {Html, Head, Main, NextScript} from 'next/document';
+import Document, {Html, Head, Main, NextScript} from 'next/document'
 import type {DocumentContext} from 'next/document'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx)
-    return { ...initialProps }
+    return {...initialProps}
   }
 
   render() {
     const meta = {
       title: 'SpaceX API Displayer by Elyas A. Al-Amri',
       description: 'GraphQL implementation that uses SpaceX API',
-      image: 'https://assets.vercel.com/image/upload/q_auto/front/vercel/dps.png'
+      image: 'https://assets.vercel.com/image/upload/q_auto/front/vercel/dps.png',
     }
 
     return (
